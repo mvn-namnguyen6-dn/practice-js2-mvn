@@ -1,0 +1,196 @@
+<h1> 1. Define a variable </h1>
+<h2> - ES5 </h2>
+<script>
+  var MAX_SIZE = 25 * 1024 * 1024;
+  var title = 'Hello World';
+  title = 'Hello ES6'
+</script>
+<h2> - ES6 </h2>
+<script>
+  const MAX_SIZE = 25 * 1024 * 1024;
+  let title = 'Hello World';
+  title = 'Hello ES6'
+</script>
+
+<h2>Let</h2>
+<p>+Cho phép chúng ta cập nhật giá trị của biến chứ không cho phép chúng ta tái khái báo lại biến đó<br>
+  +Nếu chúng ta sử dụng biến let trước khi khai báo thì sẽ gặp lỗi <br></p>
+<h2>Const</h2>
+<p> +Nếu trường hợp kiểu của biến là primitive thì chúng ta sẽ không thể tái khai báo hay cập nhật giá trị mới để thay
+  thế cho giá trị trước đó của biến.<br>
+  +Đối với trường hợp kiểu biến là reference (bao gồm object, array, và function) thì tuy không thể tái khai báo hay cập
+  nhật giá trị của biến nhưng chúng ta vẫn có thể cập nhật giá trị cho thuộc tính của biến đó.</p>
+<h1> 2. String Interpolation </h1>
+<h2> - ES5 </h2>
+<script>
+  var user = { name: 'David' };
+  var card = { amount: 7, product: "Bar", unitprice: 42 };
+  var message = "Hello " + user.name + ",\n" +
+    "want to buy " + card.amount + " " + card.product + " for\n" +
+    "a total of " + (card.amount * card.unitprice) + " bucks?";
+</script>
+<h2> - ES6 </h2>
+<script>
+  const user = { name: 'David' };
+  const card = { amount: 7, product: "Bar", unitprice: 42 };
+  const message = `Hello ${user.name},\nwant to buy ${card.amount} ${card.product} for\na total of ${card.amount * card.unitprice} bucks?`;
+</script>
+<h1>3. Rest Parameter</h1>
+<h2> - ES5 </h2>
+<script>
+  function foo(x, y) {
+    var a = Array.prototype.slice.call(arguments, 2);
+    return (x + y) * a.length;
+  };
+  foo(1, 2, 'hello', true, 7) === 9;  
+</script>
+<h2> - ES6 </h2>
+<script>
+  function foo(x, y) {
+    const a = Array.prototype.slice.call(arguments, 2);
+    return (x + y) * a.length;
+  };
+  foo(1, 2, 'hello', true, 7) === 9;
+</script>
+<h1> 4. Default Parameter Values </h1>
+<h2> - ES5 </h2>
+<script>
+  function sum(x, y, z) {
+    if (y === undefined) {
+      y = 7;
+    }
+    if (z === undefined) {
+      z = 42;
+    }
+    return x + y + z;
+  };
+</script>
+<h2> - ES6 </h2>
+<script>
+  function sum(x, y, z) {
+    if (y === undefined) {
+      y = 7;
+    }
+    if (z === undefined) {
+      z = 42;
+    }
+    return x + y + z;
+  };
+</script>
+<h1> 5. Arrow Functions </h1>
+<h2> - ES5 </h2>
+<script>
+  var evens = [1, 2, 3, 4, 5, 6];
+  var odds = evens.map(function (v) { return v + 1; });
+  var pairs = evens.map(function (v) { return { even: v, odd: v + 1 }; });
+  var nums = evens.map(function (v, i) { return v + i; });
+  var fives = [];
+  nums.forEach(function (v) {
+    if (v % 5 === 0) {
+      fives.push(v);
+    }
+  });
+</script>
+<h2> - ES6 </h2>
+<script>
+  const evens = [1, 2, 3, 4, 5, 6];
+  const odds = evens.map(v => { return v + 1; });
+  const pairs = evens.map(v => { return { even: v, odd: v + 1 }; });
+  const nums = evens.map((v, i) => { return v + i; });
+  const fives = [];
+  nums.forEach(v => {
+    if (v % 5 === 0) {
+      fives.push(v);
+    }
+  });
+</script>
+<h1> 6. Classes </h1>
+<h2> - ES5 </h2>
+<script>
+  var Shape = function (id, x, y) {
+    this.id = id;
+    this.move(x, y);
+  };
+  Shape.prototype.move = function (x, y) {
+    this.x = x;
+    this.y = y;
+  };
+</script>
+<h2> - ES6 </h2>
+<script>
+  const Shape = function (id, x, y) {
+    this.id = id;
+    this.move(x, y);
+  };
+  Shape.prototype.move = function (x, y) {
+    this.x = x;
+    this.y = y;
+  };
+</script>
+<h1> 7. Modules </h1>
+<h2> - ES5 </h2>
+<script>
+  Utils = {};
+  Utils.sum = function (x, y) { return x + y };
+  Utils.pi = 3.141593;
+  var math = Utils;
+  console.log("2π = " + math.sum(math.pi, math.pi));
+  var sum = Utils.sum, pi = Utils.pi;
+  console.log('2π = ' + sum(pi, pi)); 
+</script>
+<h2> - ES6 </h2>
+<script>
+  Utils = {};
+  Utils.sum = (x, y) => { return x + y };
+  Utils.pi = 3.141593;
+  const math = Utils;
+  console.log(`2π = ${math.sum(math.pi, math.pi)}`);
+  const sum = Utils.sum, pi = Utils.pi;
+  console.log(`2π = ${sum(pi, pi)}`);
+</script>
+<h1> 8. Promise </h1>
+<h2> - ES5 </h2>
+<script>
+  function showMessAfterTimeout(msg, who, timeout, onDone) {
+    setTimeout(function () {
+      onDone(msg + ' Hi ' + who + '!');
+    }, timeout);
+  }
+  showMessAfterTimeout('', 'Foo', 100, function (msg) {
+    showMessAfterTimeout(msg, 'Bar', 200, function (msg) {
+      console.log('Finish after 300ms:' + msg);
+    });
+  });
+</script>
+<h2> - ES6 </h2>
+<script>
+  function showMessAfterTimeout(msg, who, timeout, onDone) {
+    setTimeout(() => {
+      onDone(`${msg} Hi ${who}!`);
+    }, timeout);
+  }
+  showMessAfterTimeout('', 'Foo', 100, msg => {
+    showMessAfterTimeout(msg, 'Bar', 200, msg => {
+      console.log(`Finish after 300ms:${msg}`);
+    });
+  });
+</script>
+<h2> For...of</h2>
+<script>
+  const array1 = ['a', 'b', 'c'];
+
+  for (const element of array1) {
+    console.log(element);
+  }
+
+</script>
+<h2> findIndex</h2>
+<script>
+  const ages = [3, 10, 18, 20];
+
+  ages.findIndex(checkAge);
+
+  function checkAge(age) {
+    return age > 18;
+  }
+</script>
